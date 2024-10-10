@@ -18,6 +18,8 @@ class MatrixOperation {
         enterMatrixData(scan, matrix, matrixRow, matrixCol, matrixMultiply);
 
         printMatrix(matrix, matrixRow, matrixCol);
+        float average = findAverageSumMatrix(matrix, matrixRow, matrixCol);
+        System.out.println("The average sum of matrix elements is: " + average);
     }
 
     public static void enterMatrixData(Scanner scan, float[][] matrix, int matrixRow, int matrixCol, float matrixMultiply) {
@@ -39,5 +41,17 @@ class MatrixOperation {
             }
             System.out.println();
         }
+    }
+
+    public static float findAverageSumMatrix(float[][] matrix, int matrixRow, int matrixCol) {
+        int elementCount = matrixRow * matrixCol;
+        float matrixSum = 0;
+
+        for (int i = 0; i < matrixRow; i++) {
+            for (int j = 0; j < matrixCol; j++) {
+                matrixSum += matrix[i][j];
+            }
+        }
+        return matrixSum / elementCount;
     }
 }
