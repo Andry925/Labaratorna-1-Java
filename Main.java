@@ -19,14 +19,13 @@ class MatrixOperation {
                 throw new IllegalArgumentException("Number of columns must be a positive number.");
             }
 
-            System.out.println("Enter the constant to multiply matrix by");
-            float matrixMultiply = scan.nextFloat();
 
             float[][] matrix = new float[matrixRow][matrixCol];
-            enterMatrixData(scan, matrix, matrixRow, matrixCol, matrixMultiply);
+            enterMatrixData(scan, matrix, matrixRow, matrixCol);
+            float[][] transformedMatrix = transposeMatrix(matrix, matrixRow, matrixCol);
 
-            printMatrix(matrix, matrixRow, matrixCol);
-            float average = findAverageSumMatrix(matrix, matrixRow, matrixCol);
+            printMatrix(transformedMatrix, matrixRow, matrixCol);
+            float average = findAverageSumMatrix(transformedMatrix, matrixRow, matrixCol);
             System.out.println("The average sum of matrix elements is: " + average);
         }
         catch (InputMismatchException e) {
@@ -39,17 +38,30 @@ class MatrixOperation {
         }
     }
 
-    public static void enterMatrixData(Scanner scan, float[][] matrix, int matrixRow, int matrixCol, float matrixMultiply) {
+    public static void enterMatrixData(Scanner scan, float[][] matrix, int matrixRow, int matrixCol) {
         System.out.println("Enter Matrix Data");
         for (int i = 0; i < matrixRow; i++) {
             for (int j = 0; j < matrixCol; j++) {
                 System.out.println("Enter element");
                 matrix[i][j] = scan.nextFloat();
-                matrix[i][j] *= matrixMultiply;
+                
             }
         }
     }
 
+    public static float[][] transposeMatrix(float[][] matrix, int matrixRow, int matrixCol) {
+        float[][] transposedMatrix = new float[matrixCol][matrixRow];
+        
+        for (int i = 0; i < matrixRow; i++) {
+            for (int j = 0; j < matrixCol; j++) {
+                transposedMatrix[j][i] = matrix[i][j];
+            }
+        }
+        
+        return transposedMatrix;
+    }
+
+ 
     public static void printMatrix(float[][] matrix, int matrixRow, int matrixCol) {
         System.out.println("Your Matrix is: ");
         for (int i = 0; i < matrixRow; i++) {
